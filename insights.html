@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-width: 250px;
+        }
+    </style>
+</head>
+<body class="flex h-screen bg-gray-100">
+    <div class="sidebar bg-white shadow-md">
+        <div class="p-4 text-xl font-bold border-b">Vendor Dashboard</div>
+        <ul class="p-2">
+            <li class="p-2 hover:bg-gray-200"><a href="profilemanagement.html">Profile Management</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="listing.html">Product Listing</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="orders.html">Orders</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="insights.html">Analytics and Insights</a></li>
+        </ul>
+    </div>
+
+    <div class="flex-1 p-4">
+        <div id="content" class="mt-4">
+            <!-- Add your additional code here -->
+            <div id="analytics-insights" class="mt-4 p-4 bg-white shadow-md rounded">
+                <h2 class="text-xl font-bold mb-4">Analytics and Insights</h2>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Total Sales -->
+                    <div class="bg-blue-100 p-4 rounded-md">
+                        <h3 class="font-semibold">Total Sales This Month</h3>
+                        <p id="total-sales" class="text-2xl font-bold">$0.00</p>
+                    </div>
+            
+                    <!-- Total Orders -->
+                    <div class="bg-green-100 p-4 rounded-md">
+                        <h3 class="font-semibold">Total Orders</h3>
+                        <p id="total-orders" class="text-2xl font-bold">0</p>
+                    </div>
+            
+                    <!-- Orders Left -->
+                    <div class="bg-yellow-100 p-4 rounded-md">
+                        <h3 class="font-semibold">Pending Orders</h3>
+                        <p id="pending-orders" class="text-2xl font-bold">0</p>
+                    </div>
+            
+                    <!-- Best Selling Products -->
+                    <div class="bg-purple-100 p-4 rounded-md">
+                        <h3 class="font-semibold">Best Selling Products</h3>
+                        <ul id="best-selling-products" class="list-disc pl-5">
+                            <!-- Best selling products will be displayed here -->
+                        </ul>
+                    </div>
+                </div>
+            
+                <!-- Sales Chart -->
+                <h3 class="mt-6 text-lg font-bold">Sales Over Time</h3>
+                <div style="position: relative; width: 100%; height: 150px;">
+                    <canvas id="sales-chart"></canvas>
+                </div>
+            </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Sample data for the chart and product statistics
+                const salesData = [1200, 1500, 900, 1700, 2000, 1300]; // Sales for the last 6 months
+                const bestSellingProducts = [
+                    { name: 'Apples', sales: 300 },
+                    { name: 'Bananas', sales: 250 },
+                    { name: 'Carrots', sales: 200 },
+                ];
+                
+                // Update analytics details
+                document.getElementById('total-sales').textContent = `$${salesData.reduce((a, b) => a + b, 0).toFixed(2)}`;
+                document.getElementById('total-orders').textContent = '50'; // Example total orders
+                document.getElementById('pending-orders').textContent = '5'; // Example pending orders
+            
+                // Display best selling products
+                const bestSellingList = document.getElementById('best-selling-products');
+                bestSellingProducts.forEach(product => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${product.name}: ${product.sales} sold`;
+                    bestSellingList.appendChild(listItem);
+                });
+            
+                // Create a sales chart
+                const ctx = document.getElementById('sales-chart').getContext('2d');
+                const salesChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales ($)',
+                            data: salesData,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderWidth: 2,
+                            fill: true,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Allows custom height
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    display: true,
+                                    stepSize: 500 // Adjust step size for clarity
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    display: true, // Show x-axis ticks
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+            
+        </div>
+    </div>
+</body>
+</html>

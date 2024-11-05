@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-width: 250px;
+        }
+    </style>
+</head>
+<body class="flex h-screen bg-gray-100">
+    <div class="sidebar bg-white shadow-md">
+        <div class="p-4 text-xl font-bold border-b">Vendor Dashboard</div>
+        <ul class="p-2">
+            <li class="p-2 hover:bg-gray-200"><a href="profilemanagement.html">Profile Management</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="listing.html">Product Listing</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="orders.html">Orders</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="insights.html">Analytics and Insights</a></li>
+        </ul>
+    </div>
+
+    <div class="flex-1 p-4">
+        <div id="content" class="mt-4">
+            <!-- Add your additional code here -->
+            <div id="product-listing" class="mt-4 p-4 bg-white shadow-md rounded">
+                <h2 class="text-xl font-bold mb-4">Product Listing</h2>
+                <form id="product-form">
+                    <div class="mb-4">
+                        <label for="product-name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                        <input type="text" id="product-name" name="product-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+            
+                    <div class="mb-4">
+                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                        <select id="category" name="category" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                            <option value="">Select a category</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="meat">Meat</option>
+                            <option value="grains">Grains</option>
+                        </select>
+                    </div>
+            
+                    <div class="mb-4">
+                        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                        <input type="number" id="price" name="price" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+            
+                    <button type="submit" class="mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Product</button>
+                </form>
+            
+                <h3 class="mt-6 text-lg font-bold">Products to be Added</h3>
+                <ul id="product-list" class="mt-2 bg-gray-100 p-2 rounded-md">
+                    <!-- Product list will be displayed here -->
+                </ul>
+            </div>
+            
+            <script>
+                const productList = [];
+            
+                document.getElementById('product-form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+            
+                    // Get the form data
+                    const productName = document.getElementById('product-name').value;
+                    const category = document.getElementById('category').value;
+                    const price = document.getElementById('price').value;
+            
+                    // Create a product object
+                    const product = {
+                        name: productName,
+                        category: category,
+                        price: parseFloat(price).toFixed(2), // Format price to 2 decimal places
+                    };
+            
+                    // Add product to the product list
+                    productList.push(product);
+            
+                    // Clear the form fields
+                    document.getElementById('product-form').reset();
+            
+                    // Display the updated product list
+                    displayProductList();
+                });
+            
+                function displayProductList() {
+                    const productListElement = document.getElementById('product-list');
+                    productListElement.innerHTML = ''; // Clear previous list
+            
+                    // Loop through the product list and create list items
+                    productList.forEach((product, index) => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${product.name} - ${product.category} - $${product.price}`;
+                        productListElement.appendChild(listItem);
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>

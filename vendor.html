@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-width: 250px;
+        }
+    </style>
+</head>
+<body class="flex h-screen bg-gray-100">
+    <div class="sidebar bg-white shadow-md">
+        <div class="p-4 text-xl font-bold border-b">Vendor Dashboard</div>
+        <ul class="p-2">
+            <li class="p-2 hover:bg-gray-200"><a href="#profile-management">Profile Management</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="#product-listing">Product Listing</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="#orders">Orders</a></li>
+            <li class="p-2 hover:bg-gray-200"><a href="#analytics">Analytics and Insights</a></li>
+        </ul>
+    </div>
+
+    <div class="flex-1 p-4">
+        <h1 class="text-2xl font-bold">Welcome to Your Dashboard</h1>
+        <div id="content" class="mt-4">
+            <!-- Add your additional code here -->
+            <p>This area can be used to display the content based on the sidebar selection.</p>
+        </div>
+    </div>
+</body>
+</html>
